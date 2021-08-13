@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>debounce</p>
+    <input type="button" value="debounce" id="debounce-input">
+    <p>throttle</p>
+    <input type="button" id="throttle-input" value="throttle">
+    <script>
+        let debounceInput = document.getElementById('debounce-input')
+        function showDebounce() {
+            console.log(new Date());
+            console.log(this);
+        }
+        function debounce(func, delay) {
+            let timer;
+            return function () {
+                let self = this
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func.call(self)
+                }, delay)
+            }
+        }
+        debounceInput.addEventListener('click', debounce(showDebounce, 2000))
+
+
+        let throttleInput = document.getElementById('throttle-input')
+        function showtThrottle() {
+            console.log(new Date());
+            console.log(this);
+        }
+        function throttle(func,delay) {
+            let pre = 0
+            return function () {
+                let self =this 
+              let now =new Date();
+              if(now - pre  > delay){
+                  pre = now 
+                  func.call(self)
+
+              }
+            }
+        }
+        throttleInput.addEventListener('click',throttle(showtThrottle, 2000))
+
+    </script>
+</body>
+
+</html>

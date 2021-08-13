@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>stack展示</h2>
+    <ul id="stack-list"></ul>
+    <input type="text" id="push">
+    <input type="button" id="pushBtn" value="增加">
+    <input type="button" id="popBtn" value="刪除最後一個">
+    <input type="button" id="deleteBtn" value="刪除第一個">
+    <script>
+        class Stack {
+            constructor() {
+                this.arr = []
+            }
+            push(val) {
+                this.arr.push(val)
+            }
+            pop() {
+                this.arr.pop()
+            }
+            shift(){
+                this.arr.shift()
+            }
+        }
+        let test = new Stack();
+        let push = document.getElementById('push')
+        let pushBtn = document.getElementById('pushBtn')
+        let popBtn = document.getElementById('popBtn')
+        let stackList = document.getElementById('stack-list')
+        pushBtn.addEventListener('click', () => {
+            test.push(push.value)
+            push.value = ''
+            let htmlStr = ''
+            test.arr.forEach(e => {
+                htmlStr = htmlStr + `
+                <li>${e}</li>
+                `
+            })
+            stackList.innerHTML = htmlStr;
+        })
+
+        popBtn.addEventListener('click', () => {
+            test.pop();
+            let htmlStr = ''
+            test.arr.forEach(e => {
+                htmlStr = htmlStr + `
+                <li>${e}</li>
+                `
+            })
+            stackList.innerHTML = htmlStr;
+        })
+        let deleteBtn = document.getElementById('deleteBtn')
+        deleteBtn.addEventListener('click', () => {
+            test.shift();
+            let htmlStr = ''
+            test.arr.forEach(e => {
+                htmlStr = htmlStr + `
+                <li>${e}</li>
+                `
+            })
+            stackList.innerHTML = htmlStr;
+        })
+
+
+    </script>
+</body>
+
+</html>
